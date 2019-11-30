@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title>Heman Shakeri | From Corey now with front matter</title>
+  <meta name="description" content="Academic homepage for Heman Shakeri. 
+">
+
+  
+
+  <link rel="shortcut icon" href="/hshakeri.github.io/assets/img/favicon.ico">
+
+  <link rel="stylesheet" href="/hshakeri.github.io/assets/css/main.css">
+  <link rel="canonical" href="/hshakeri.github.io/blog/2019/From-Corey-Schafer/">
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    
+    <span class="site-title">
+        
+        <strong>Heman</strong> Shakeri
+    </span>
+    
+
+    <nav class="site-nav">
+      <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+              <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+              <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+      <div class="trigger">
+        <!-- About -->
+        <a class="page-link" href="/hshakeri.github.io/">about</a>
+
+        <!-- Blog -->
+        <a class="page-link" href="/hshakeri.github.io/blog/">blog</a>
+
+        <!-- Pages -->
+        
+          
+        
+          
+        
+          
+        
+          
+            <a class="page-link" href="/hshakeri.github.io/projects/">projects</a>
+          
+        
+          
+            <a class="page-link" href="/hshakeri.github.io/publications/">publications</a>
+          
+        
+          
+            <a class="page-link" href="/hshakeri.github.io/teaching/">teaching</a>
+          
+        
+          
+        
+          
+        
+
+        <!-- CV link -->
+        <!-- <a class="page-link" href="/hshakeri.github.io/assets/pdf/CV.pdf">vitae</a> -->
+
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">From Corey now with front matter</h1>
+    <p class="post-meta">November 25, 2019</p>
+  </header>
+
+  <article class="post-content">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">threading</span>
+
+<span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">do_something</span><span class="p">(</span><span class="n">seconds</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s">'Sleeping {seconds} second(s)...'</span><span class="p">)</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">seconds</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">f</span><span class="s">'Done Sleeping...{seconds}'</span>
+
+
+<span class="c1"># with concurrent.futures.ThreadPoolExecutor() as executor:
+#     secs = [5, 4, 3, 2, 1]
+#     results = executor.map(do_something, secs)
+</span>
+    <span class="c1"># for result in results:
+</span>    <span class="c1">#     print(result)
+</span>
+<span class="n">threads</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">do_something</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="mf">1.5</span><span class="p">])</span>
+    <span class="n">t</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+    <span class="n">threads</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">thread</span> <span class="ow">in</span> <span class="n">threads</span><span class="p">:</span>
+    <span class="n">thread</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+
+<span class="n">finish</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s">'Finished in {round(finish-start, 2)} second(s)'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Sleeping 1.5 second(s)...
+Sleeping 1.5 second(s)...
+Sleeping 1.5 second(s)...
+Sleeping 1.5 second(s)...
+Sleeping 1.5 second(s)...
+Sleeping 1.5 second(s)...
+Sleeping 1.5 second(s)...
+Sleeping 1.5 second(s)...
+Sleeping 1.5 second(s)...
+Sleeping 1.5 second(s)...
+Finished in 1.51 second(s)
+</code></pre></div></div>
+
+<h4 id="import-concurrentfutures">import concurrent.futures</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">concurrent.futures</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">do_something</span><span class="p">(</span><span class="n">seconds</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s">'Sleeping {seconds} second(s)...'</span><span class="p">)</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">seconds</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">f</span><span class="s">'Done Sleeping...{seconds}'</span>
+
+
+<span class="k">with</span> <span class="n">concurrent</span><span class="o">.</span><span class="n">futures</span><span class="o">.</span><span class="n">ThreadPoolExecutor</span><span class="p">()</span> <span class="k">as</span> <span class="n">executor</span><span class="p">:</span>
+    <span class="n">secs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">executor</span><span class="o">.</span><span class="nb">map</span><span class="p">(</span><span class="n">do_something</span><span class="p">,</span> <span class="n">secs</span><span class="p">)</span>
+
+    <span class="c1"># for result in results:
+</span>    <span class="c1">#     print(result)
+</span>
+<span class="c1"># threads = []
+</span>
+<span class="c1"># for _ in range(10):
+#     t = threading.Thread(target=do_something, args=[1.5])
+#     t.start()
+#     threads.append(t)
+</span>
+<span class="c1"># for thread in threads:
+#     thread.join()
+</span>
+<span class="n">finish</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s">'Finished in {round(finish-start, 2)} second(s)'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Sleeping 5 second(s)...
+Sleeping 4 second(s)...
+Sleeping 3 second(s)...
+Sleeping 2 second(s)...Sleeping 1 second(s)...
+
+Finished in 5.0 second(s)
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">concurrent.futures</span>
+
+<span class="n">img_urls</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s">'https://images.unsplash.com/photo-1516117172878-fd2c41f4a759'</span><span class="p">,</span>
+    <span class="s">'https://images.unsplash.com/photo-1532009324734-20a7a5813719'</span><span class="p">,</span>
+    <span class="s">'https://images.unsplash.com/photo-1524429656589-6633a470097c'</span><span class="p">,</span>
+    <span class="s">'https://images.unsplash.com/photo-1530224264768-7ff8c1789d79'</span><span class="p">,</span>
+    <span class="s">'https://images.unsplash.com/photo-1564135624576-c5c88640f235'</span><span class="p">,</span>
+    <span class="s">'https://images.unsplash.com/photo-1541698444083-023c97d3f4b6'</span><span class="p">,</span>
+    <span class="s">'https://images.unsplash.com/photo-1522364723953-452d3431c267'</span><span class="p">,</span>
+    <span class="s">'https://images.unsplash.com/photo-1513938709626-033611b8cc03'</span><span class="p">,</span>
+    <span class="s">'https://images.unsplash.com/photo-1507143550189-fed454f93097'</span><span class="p">,</span>
+    <span class="s">'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e'</span><span class="p">,</span>
+    <span class="s">'https://images.unsplash.com/photo-1504198453319-5ce911bafcde'</span><span class="p">,</span>
+    <span class="s">'https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99'</span><span class="p">,</span>
+    <span class="s">'https://images.unsplash.com/photo-1516972810927-80185027ca84'</span><span class="p">,</span>
+    <span class="s">'https://images.unsplash.com/photo-1550439062-609e1531270e'</span><span class="p">,</span>
+    <span class="s">'https://images.unsplash.com/photo-1549692520-acc6669e2f0c'</span>
+<span class="p">]</span>
+
+<span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">download_image</span><span class="p">(</span><span class="n">img_url</span><span class="p">):</span>
+    <span class="n">img_bytes</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">img_url</span><span class="p">)</span><span class="o">.</span><span class="n">content</span>
+    <span class="n">img_name</span> <span class="o">=</span> <span class="n">img_url</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">'/'</span><span class="p">)[</span><span class="mi">3</span><span class="p">]</span>
+    <span class="n">img_name</span> <span class="o">=</span> <span class="n">f</span><span class="s">'{img_name}.jpg'</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">img_name</span><span class="p">,</span> <span class="s">'wb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">img_file</span><span class="p">:</span>
+        <span class="n">img_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">img_bytes</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s">'{img_name} was downloaded...'</span><span class="p">)</span>
+
+
+<span class="k">with</span> <span class="n">concurrent</span><span class="o">.</span><span class="n">futures</span><span class="o">.</span><span class="n">ThreadPoolExecutor</span><span class="p">()</span> <span class="k">as</span> <span class="n">executor</span><span class="p">:</span>
+    <span class="n">executor</span><span class="o">.</span><span class="nb">map</span><span class="p">(</span><span class="n">download_image</span><span class="p">,</span> <span class="n">img_urls</span><span class="p">)</span>
+
+
+<span class="n">t2</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s">'Finished in {t2-t1} seconds'</span><span class="p">)</span>
+</code></pre></div></div>
+
+  </article>
+
+  
+
+</div>
+
+      </div>
+    </div>
+
+    <footer>
+
+  <div class="wrapper">
+    &copy; Copyright 2019 Heman Shakeri.
+    Powered by <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio">al-folio</a> theme. Hosted by <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>. I am using photos from <a href="https://unsplash.com" target="_blank">Unsplash</a>.
+
+    
+  </div>
+
+</footer>
+
+
+    <!-- Load jQuery -->
+<script src="//code.jquery.com/jquery-1.12.4.min.js"></script>
+
+<!-- Load Common JS -->
+<script src="/hshakeri.github.io/assets/js/common.js"></script>
+
+
+<!-- Load KaTeX -->
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.js"></script>
+<script src="/hshakeri.github.io/assets/js/katex.js"></script>
+
+
+
+
+<!-- Include custom icon fonts -->
+<link rel="stylesheet" href="/hshakeri.github.io/assets/css/fontawesome-all.min.css">
+<link rel="stylesheet" href="/hshakeri.github.io/assets/css/academicons.min.css">
+
+
+<!-- Google Analytics -->
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-XXXXXXXXX', 'auto');
+ga('send', 'pageview');
+</script>
+
+
+
+  </body>
+
+</html>
